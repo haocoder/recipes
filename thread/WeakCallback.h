@@ -15,6 +15,7 @@ namespace muduo
 {
 
 // A barely usable WeakCallback
+// 通用的弱回调封装，使用c++11的variadic template和rvalue reference
 
 template<typename CLASS, typename... ARGS>
 class WeakCallback
