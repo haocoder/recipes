@@ -6,7 +6,7 @@ class Request
   void process() // __attribute__ ((noinline))
   {
     muduo::MutexLockGuard lock(mutex_);
-    print();
+    print();            // 重复加锁，导致死锁
   }
 
   void print() const // __attribute__ ((noinline))

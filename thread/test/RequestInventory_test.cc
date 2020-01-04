@@ -8,6 +8,7 @@ class Request;
 
 class Inventory
 {
+ // 借助shared_ptr实现copy-on-write来并发修改Inventory
  public:
   Inventory()
     : requests_(new RequestList)
@@ -19,11 +20,11 @@ class Inventory
     muduo::MutexLockGuard lock(mutex_);
     if (!requests_.unique())
     {
-      requests_.reset(new RequestList(*requests_));
+      requests_.reset(new RequestList(*requests_)); // copy
       printf("Inventory::add() copy the whole list\n");
     }
     assert(requests_.unique());
-    requests_->insert(req);
+    requests_->insert(req);  // write in copy
   }
 
   void remove(Request* req) // __attribute__ ((noinline))

@@ -10,6 +10,7 @@ typedef boost::shared_ptr<Request> RequestPtr;
 
 class Inventory
 {
+ //
  public:
   Inventory()
     : requests_(new RequestList)
@@ -60,6 +61,7 @@ Inventory g_inventory;
 
 class Request : public boost::enable_shared_from_this<Request>
 {
+ // 解决Request对象析构时race condition
  public:
   Request()
     : x_(0)

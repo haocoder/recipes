@@ -33,7 +33,7 @@ void traverse()
 void Foo::doit() const
 {
   Foo f;
-  post(f);
+  post(f); // 调用post()，对于非递归Mutex, 重复加锁会导致死锁
 }
 
 int main()
